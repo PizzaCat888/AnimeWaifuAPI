@@ -50,6 +50,8 @@ struct MainView: View {
           
       }
     
+    @State private var offset: CGSize = .zero
+    
     var body: some View {
         
         NavigationView {
@@ -62,9 +64,22 @@ struct MainView: View {
                     } placeholder: {
                         ProgressView()
                     }
-                    .frame(width: 350, height: 500)
-                    
-                    
+                    .frame(width: 350, height: 480)
+                    .offset(x: offset.width, y: 0)
+                    .gesture(
+                    DragGesture()
+                    .onChanged { gesture in
+                        self.offset = gesture.translation
+                            }
+                        .onEnded { _ in
+                        if self.offset.width > 100 {
+                            // Swipe right, like the image
+                        } else if self.offset.width < -100 {
+                            // Swipe left, dislike the image
+                            }
+                            self.offset = .zero
+                            }
+                        )
                     
                 }
                 
@@ -74,8 +89,6 @@ struct MainView: View {
                  runLoadData()
                  disableTask()
                 }
-            }.refreshable() {
-                await loadData()
             }
         }
     }
