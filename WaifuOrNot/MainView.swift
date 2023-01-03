@@ -17,7 +17,7 @@ struct MainView: View {
     
     func loadData() async {
         
-        guard let url = URL(string: "https://api.waifu.im/search/?included_tags=waifu") else {
+        guard let url = URL(string: "https://api.waifu.im/search/?included_tags=waifu&many=true") else {
             print("Invalid URL")
             return
         }
@@ -27,7 +27,7 @@ struct MainView: View {
             if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
                 
                 images = decodedResponse.images
-                print(images)
+                print(images[0])
             }
             
         } catch {
@@ -42,15 +42,21 @@ struct MainView: View {
       func disableTask() {
           runFunction = false
       }
-      
+
       func runLoadData() {
           Task{
               await loadData()
           }
-          
       }
     
-    @State private var offset: CGSize = .zero
+    @State private var isLiked = false
+//    @State private var imagesArray: [(String, Bool)] = [
+//          ("image1", false),
+//          ("image2", false),
+//          ("image3", false),
+//          ("image4", false)
+//      ]
+    
     
     var body: some View {
         
@@ -65,23 +71,23 @@ struct MainView: View {
                         ProgressView()
                     }
                     .frame(width: 350, height: 480)
-                    .offset(x: offset.width, y: 0)
                     .gesture(
-                    DragGesture()
-                    .onChanged { gesture in
-                        self.offset = gesture.translation
-                            }
-                        .onEnded { _ in
-                        if self.offset.width > 100 {
-                            // Swipe right, like the image
-                        } else if self.offset.width < -100 {
-                            // Swipe left, dislike the image
-                            }
-                            self.offset = .zero
-                            }
-                        )
-                    
+                        TapGesture(count: 2)
+                                        .onEnded {
+                                            isLiked.toggle()
+                                        }
+                                )
+                    Label("", systemImage: isLiked ? "heart.fill" : "heart")
                 }
+                 
+                
+                                    
+                
+                    
+                
+                                
+                        
+                Spacer().frame(height: 5)
                 
                 
             }.task {

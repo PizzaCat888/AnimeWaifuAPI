@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
+        
+        //app to be renamed to waifu scroller?
         TabView {
             MainView().tabItem {
                 Label("Waifus", systemImage: "star.leadinghalf.filled")
