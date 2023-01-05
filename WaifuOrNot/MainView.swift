@@ -28,6 +28,7 @@ struct MainView: View {
                 
                 images = decodedResponse.images
                 print(images[0])
+                
             }
             
         } catch {
@@ -49,13 +50,9 @@ struct MainView: View {
           }
       }
     
-    @State private var isLiked = false
-//    @State private var imagesArray: [(String, Bool)] = [
-//          ("image1", false),
-//          ("image2", false),
-//          ("image3", false),
-//          ("image4", false)
-//      ]
+//    @State private var isLiked = false
+////    @State private var numbers = Array(0...30)
+//    Label("", systemImage: isLiked ? "heart.fill" : "heart")
     
     
     var body: some View {
@@ -74,20 +71,17 @@ struct MainView: View {
                     .gesture(
                         TapGesture(count: 2)
                                         .onEnded {
-                                            isLiked.toggle()
+                                            print("double tapped")
                                         }
                                 )
-                    Label("", systemImage: isLiked ? "heart.fill" : "heart")
+                    
                 }
-                 
+                ShareLink(item: item.source) {
+                    Label("", systemImage:  "square.and.arrow.up")
+                }
                 
                                     
                 
-                    
-                
-                                
-                        
-                Spacer().frame(height: 5)
                 
                 
             }.task {
