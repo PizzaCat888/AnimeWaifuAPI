@@ -63,6 +63,7 @@ struct MainView: View {
     var body: some View {
         
         NavigationStack {
+           
             List(images, id: \.url) { item in
                 VStack(alignment: .leading) {
                     CachedAsyncImage(url: URL(string: item.url)){ image in
@@ -92,9 +93,12 @@ struct MainView: View {
                  runLoadData()
                  disableTask()
                 }
+            }.refreshable() {
+               runLoadData()
             }
-            .navigationTitle("Anime Scroller")
-            .navigationBarItems(trailing:
+            
+           
+        } .navigationBarItems(trailing:
                                 Button("Scroll to Top") {
                                     self.scrollToTop = true
                                     print("scroll to top button was pressed")
@@ -110,7 +114,6 @@ struct MainView: View {
                                         self.scrollTo(index)
                                     }
                                 })
-        }
            
     }
 }
