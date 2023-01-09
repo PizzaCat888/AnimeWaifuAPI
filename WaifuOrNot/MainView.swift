@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import CachedAsyncImage
 //class ImagesAPI: ObservableObject {
 //    @Published var image = [Image]()
 //}
@@ -50,17 +50,22 @@ struct MainView: View {
           }
       }
     
-//    @State private var isLiked = false
-////    @State private var numbers = Array(0...30)
-//    Label("", systemImage: isLiked ? "heart.fill" : "heart")
+    @State private var scrollToTop = false
+
+    func firstIndex(of item: Int) -> Int {
+            return 0
+        }
+
+        // Dummy function to satisfy the `onChange` requirement
+        func scrollTo(_ index: Int) { }
     
-    
+
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             List(images, id: \.url) { item in
                 VStack(alignment: .leading) {
-                    AsyncImage(url: URL(string: item.url)){ image in
+                    CachedAsyncImage(url: URL(string: item.url)){ image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -68,14 +73,12 @@ struct MainView: View {
                         ProgressView()
                     }
                     .frame(width: 350, height: 480)
-                    .gesture(
-                        TapGesture(count: 2)
-                                        .onEnded {
-                                            print("double tapped")
-                                        }
-                                )
+                    .onLongPressGesture {
+                                   print("long press gesture")
+                               }
                     
                 }
+                
                 ShareLink(item: item.source) {
                     Label("", systemImage:  "square.and.arrow.up")
                 }
@@ -90,7 +93,25 @@ struct MainView: View {
                  disableTask()
                 }
             }
+            .navigationTitle("Anime Scroller")
+            .navigationBarItems(trailing:
+                                Button("Scroll to Top") {
+                                    self.scrollToTop = true
+                                    print("scroll to top button was pressed")
+                                }) .onAppear {
+                                    self.scrollToTop = false
+                                                                    }
+                                .onChange(of: scrollToTop, perform: { value in
+                                    if value {
+                                        // Find the index of the first item in the list
+                                        let index = self.firstIndex(of: 0)
+
+                                        // Scroll to the top of the list
+                                        self.scrollTo(index)
+                                    }
+                                })
         }
+           
     }
 }
 //struct MainView_Previews: PreviewProvider {

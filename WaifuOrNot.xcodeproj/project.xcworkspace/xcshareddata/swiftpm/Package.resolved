@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "swiftui-cachedasyncimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lorenzofiamingo/SwiftUI-CachedAsyncImage",
+      "state" : {
+        "revision" : "467a3d17479887943ab917a379e62bbaff60ac8a",
+        "version" : "2.1.1"
+      }
+    }
+  ],
+  "version" : 2
+}

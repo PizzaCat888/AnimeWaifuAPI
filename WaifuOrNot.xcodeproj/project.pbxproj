@@ -15,6 +15,7 @@
 		8CA4E0A12962507C00A72782 /* LikesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4E0A02962507C00A72782 /* LikesView.swift */; };
 		8CA4E0A32962508B00A72782 /* DonateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4E0A22962508B00A72782 /* DonateView.swift */; };
 		8CA4E0A52962523900A72782 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4E0A42962523900A72782 /* DataModel.swift */; };
+		8CF1697A296C6D2300EA674F /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8CF16979296C6D2300EA674F /* CachedAsyncImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF1697A296C6D2300EA674F /* CachedAsyncImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +97,9 @@
 			dependencies = (
 			);
 			name = WaifuOrNot;
+			packageProductDependencies = (
+				8CF16979296C6D2300EA674F /* CachedAsyncImage */,
+			);
 			productName = WaifuOrNot;
 			productReference = 8CA4E08D29624EE900A72782 /* WaifuOrNot.app */;
 			productType = "com.apple.product-type.application";
@@ -123,6 +128,9 @@
 				Base,
 			);
 			mainGroup = 8CA4E08429624EE900A72782;
+			packageReferences = (
+				8CF16978296C6D2300EA674F /* XCRemoteSwiftPackageReference "SwiftUI-CachedAsyncImage" */,
+			);
 			productRefGroup = 8CA4E08E29624EE900A72782 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -357,6 +365,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8CF16978296C6D2300EA674F /* XCRemoteSwiftPackageReference "SwiftUI-CachedAsyncImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/SwiftUI-CachedAsyncImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8CF16979296C6D2300EA674F /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CF16978296C6D2300EA674F /* XCRemoteSwiftPackageReference "SwiftUI-CachedAsyncImage" */;
+			productName = CachedAsyncImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8CA4E08529624EE900A72782 /* Project object */;
 }
