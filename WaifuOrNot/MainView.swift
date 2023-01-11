@@ -73,12 +73,17 @@ struct MainView: View {
                     } placeholder: {
                         ProgressView()
                     }
-                    .frame(width: 350, height: 480)
+                    .frame(width: 300, height: 480)
                     .onLongPressGesture {
                                    print("long press gesture")
                                }
                     
                 }
+                
+                NavigationLink (destination: LikesView(animePic: item.url)) {
+                    Text("More Details")
+                }
+                
                 
                 ShareLink(item: item.source) {
                     Label("", systemImage:  "square.and.arrow.up")

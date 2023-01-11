@@ -6,16 +6,38 @@
 //
 
 import SwiftUI
-
+import CachedAsyncImage
 struct LikesView: View {
     
+    let animePic: String
+    
+    init(animePic: String) {
+        self.animePic = animePic
+        
+    }
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        CachedAsyncImage(url: URL(string: animePic)){ image in
+            image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        } placeholder: {
+            ProgressView()
+        }
+        .frame(width: 350, height: 500)
+        .onLongPressGesture {
+                       print("long press gesture")
+                   }
+        
+        ShareLink(item: animePic) {
+            Label("", systemImage:  "square.and.arrow.up")
+        }
     }
-}
+    }
 
-struct LikesView_Previews: PreviewProvider {
-    static var previews: some View {
-        LikesView()
-    }
-}
+
+//struct LikesView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LikesView()
+//    }
+//}

@@ -16,9 +16,6 @@ struct ContentView: View {
                 Label("Waifus", systemImage: "star.leadinghalf.filled")
             }
             
-            LikesView().tabItem {
-                Label("Likes", systemImage: "star.leadinghalf.filled")
-            }
             
             DonateView().tabItem {
                 Label("Donate", systemImage: "star.leadinghalf.filled")
