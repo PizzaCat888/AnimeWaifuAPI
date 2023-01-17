@@ -12,6 +12,8 @@ import CachedAsyncImage
 //}
 
 struct MainView: View {
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State private var counter = 0
     
     @State private var images = [Image]()
     
@@ -74,32 +76,41 @@ struct MainView: View {
                         ProgressView()
                     }
                     .frame(width: 300, height: 480)
-                    .onLongPressGesture {
-                                   print("long press gesture")
-                               }
+                    
                     
                 }
                 
-                NavigationLink (destination: LikesView(animePic: item.url)) {
-                    Text("More Details")
-                }
+                    ShareLink(item: item.source) {
+                        Label("Share", systemImage:  "square.and.arrow.up")
+                    }
+                    
+                    NavigationLink {
+                         LikesView(animePic: item.url)
+                    }
+                    label: {
+                        Label("More Detail", systemImage: "plus.magnifyingglass")
+                    }
+                    
                 
-                
-                ShareLink(item: item.source) {
-                    Label("", systemImage:  "square.and.arrow.up")
-                }
-                
-                                    
-                
-                
+             
                 
             }.task {
-                if runFunction {
+                if runFunction{
                  runLoadData()
                  disableTask()
                 }
-            }.refreshable() {
-               runLoadData()
+            }.onReceive(timer) { time in
+                if images.isEmpty && counter > 3 {
+                    print(time)
+                    runLoadData()
+                }
+                if counter == 10 {
+                    timer.upstream.connect().cancel()
+                    print("timer has stopped")
+                }
+                counter += 1
+            }.refreshable {
+                runLoadData()
             }
             
            

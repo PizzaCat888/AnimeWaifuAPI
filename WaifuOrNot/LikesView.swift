@@ -25,9 +25,7 @@ struct LikesView: View {
             ProgressView()
         }
         .frame(width: 350, height: 500)
-        .onLongPressGesture {
-                       print("long press gesture")
-                   }
+        
         
         ShareLink(item: animePic) {
             Label("", systemImage:  "square.and.arrow.up")
