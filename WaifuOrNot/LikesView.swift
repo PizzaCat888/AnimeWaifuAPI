@@ -16,7 +16,7 @@ struct LikesView: View {
         
     }
     var body: some View {
-        
+       
         CachedAsyncImage(url: URL(string: animePic)){ image in
             image
                 .resizable()
@@ -26,10 +26,14 @@ struct LikesView: View {
         }
         .frame(width: 350, height: 500)
         
-        
-        ShareLink(item: animePic) {
-            Label("", systemImage:  "square.and.arrow.up")
+        VStack {
+            ShareLink(item: animePic) {
+                Label("", systemImage:  "square.and.arrow.up").font(.system(size: 30))
+            }
+            
         }
+        
+       
     }
     }
 

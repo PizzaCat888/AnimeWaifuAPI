@@ -80,16 +80,14 @@ struct MainView: View {
                     
                 }
                 
-                    ShareLink(item: item.source) {
-                        Label("Share", systemImage:  "square.and.arrow.up")
+                
+                    NavigationLink (destination: LikesView(animePic: item.url)){
+                        Label("More Details", systemImage:  "rectangle.portrait.and.arrow.right.fill")
                     }
                     
-                    NavigationLink {
-                         LikesView(animePic: item.url)
-                    }
-                    label: {
-                        Label("More Detail", systemImage: "plus.magnifyingglass")
-                    }
+                
+                 
+                   
                     
                 
              
